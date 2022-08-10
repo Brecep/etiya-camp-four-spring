@@ -24,7 +24,6 @@ import lombok.NoArgsConstructor;
 public class Product {
 	@Id
 	@Column(name = "product_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int productId;
 
 	@Column(name = "product_name")
@@ -36,6 +35,18 @@ public class Product {
 	@Column(name = "units_in_stock")
 	private int unitsInStock;
 
+	@Column(name="quantity_per_unit")
+	private String quantityPerUnit;
+	
+	@Column(name="units_on_order")
+	private int unitsOnOrder;
+	
+	@Column(name = "reorder_level")
+	private int reorderLevel;
+	
+	@Column(name = "discontinued")
+	private int discontinued;
+	
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;

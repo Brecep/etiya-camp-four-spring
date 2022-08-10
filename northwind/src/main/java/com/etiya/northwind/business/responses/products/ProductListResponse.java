@@ -9,9 +9,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProductListResponse {
 	private int productId;
+	
 	private String productName;
+	
 	private double unitPrice;
-	private int categoryId;
-	private String categoryName;
+	
 	private int unitsInStock;
+	
+	private int categoryId;
+	
+	private String categoryName;
+
 }

@@ -1,26 +1,28 @@
 package com.etiya.northwind.business.responses.orders;
 
 import java.time.LocalDate;
-
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class OrderListResponse {
+
+	
 	private int orderId;
-
-	private LocalDate orderDate;
-
-	private LocalDate requiredDate;
-
-	private LocalDate shippedDate;
-
-	private String customerId;
-
-	private int employeeId;
-
+	
+	private String customerCompanyName;
+	
+	private String employeeFirstName;
+	private String employeeLastName;
+	
+	private Date orderDate;
+	
+	private String contactName;
+	private String employeeFullName;
+	
 }

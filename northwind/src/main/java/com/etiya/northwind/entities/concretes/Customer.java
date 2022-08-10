@@ -21,7 +21,6 @@ import lombok.NoArgsConstructor;
 @Table(name = "customers")
 public class Customer {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "customer_id")
 	private String customerId;
 
@@ -43,16 +42,18 @@ public class Customer {
 	@Column(name = "region")
 	private String region;
 
-	// @Column(name = "postal_code")
-	// private String postalCode;
+	 @Column(name = "postal_code")
+	 private String postalCode;
 
 	@Column(name = "country")
 	private String country;
-	/*
-	 * @Column(name = "phone") private String phone;
-	 * 
-	 * @Column(name = "fax") private String fax;
-	 */
+	
+	 @Column(name = "phone") 
+	 private String phone;
+	  
+	@Column(name = "fax") 
+	private String fax;
+	 
 	@OneToMany(mappedBy = "customer")
 	private List<Order> orders;
 

@@ -23,7 +23,6 @@ import lombok.NoArgsConstructor;
 public class Employee {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "employee_id")
 	private int employeeId;
 
@@ -40,7 +39,7 @@ public class Employee {
 	private String titleOfCourtesy;
 
 	@Column(name = "birth_date")
-	private LocalDate birtDate;
+	private LocalDate birthDate;
 
 	@Column(name = "hire_date")
 	private LocalDate hireDate;

@@ -1,45 +1,100 @@
 package com.etiya.northwind.business.concretes;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.etiya.northwind.business.abstracts.ProductService;
+import com.etiya.northwind.business.requests.products.CreateRequestProduct;
+import com.etiya.northwind.business.requests.products.DeleteRequestProduct;
+import com.etiya.northwind.business.requests.products.UpdateRequestProduct;
+import com.etiya.northwind.business.responses.products.GetProductResponse;
 import com.etiya.northwind.business.responses.products.ProductListResponse;
-import com.etiya.northwind.dataAccess.absracts.ProductRepository;
+import com.etiya.northwind.core.utilities.mapping.ModelMapperService;
+import com.etiya.northwind.dataAccess.abstracts.ProductRepository;
 import com.etiya.northwind.entities.concretes.Product;
 
 @Service
 public class ProductManager implements ProductService {
-	private ProductRepository productRepository;
 
+	private ProductRepository productRepository;
+	private ModelMapperService modelMapperService;
+	
 	@Autowired
-	public ProductManager(ProductRepository productRepository) {
-		super();
+	public ProductManager(ProductRepository productRepository, ModelMapperService modelMapperService) {
 		this.productRepository = productRepository;
+		this.modelMapperService = modelMapperService;
 	}
-	
-	
+
+
+
 	@Override
 	public List<ProductListResponse> getAll() {
 		List<Product> result = this.productRepository.findAll();
-		List<ProductListResponse> responses = new ArrayList<>();
+		List<ProductListResponse> response = result.stream().map(product
+				->this.modelMapperService.forResponse().
+				map(product, ProductListResponse.class)).collect(Collectors.toList());
+		
+		return response;
+	}
 
-		for (Product product : result) {
-			ProductListResponse responseProduct = new ProductListResponse();
-			responseProduct.setCategoryId(product.getCategory().getCategoryId());
-			responseProduct.setCategoryName(product.getCategory().getCategoryName());
-			responseProduct.setProductId(product.getProductId());
-			responseProduct.setProductName(product.getProductName());
-			responseProduct.setUnitPrice(product.getUnitPrice());
-			responseProduct.setUnitsInStock(product.getUnitsInStock());
+//update,delete,getById
 
-			responses.add(responseProduct);
-		}
+	@Override
+	public void add(CreateRequestProduct createRequestProduct ) {
+		
+		Product product = this.modelMapperService.forRequest().
+				map(createRequestProduct, Product.class);
+		this.productRepository.save(product);
+		
+	}
 
-		return responses;
+
+
+	@Override
+	public GetProductResponse getById(int productId) {
+		
+		Product product = this.productRepository.getById(productId);
+		GetProductResponse getProductResponse = this.modelMapperService.forResponse().map(product, GetProductResponse.class);	
+		return getProductResponse;
+		
+		
+	}
+
+
+
+	@Override
+	public void delete(DeleteRequestProduct deleteRequestProduct) {
+			
+		this.productRepository.deleteById(deleteRequestProduct.getProductId());
+	}
+
+
+
+	@Override
+	public void update(UpdateRequestProduct updateRequestProduct) {
+		
+		Product product = this.modelMapperService.forRequest().map(updateRequestProduct, Product.class);
+		this.productRepository.save(product);
+		
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

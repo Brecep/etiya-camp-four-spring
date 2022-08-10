@@ -23,11 +23,17 @@ import lombok.NoArgsConstructor;
 public class Category {
 	@Id
 	@Column(name = "category_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int categoryId;
 
 	@Column(name = "category_name")
 	private String categoryName;
+	
+	@Column(name = "description")
+	private String description;
+	
+	@Column(name = "picture")
+	private byte[] picture;
+	
 	
 	@OneToMany(mappedBy = "category") //eşleşeceği alana gider
 	private List<Product> products; //bir kategorinin birden fazla ürünü olur

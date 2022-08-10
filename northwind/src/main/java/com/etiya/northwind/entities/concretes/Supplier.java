@@ -22,7 +22,6 @@ import lombok.NoArgsConstructor;
 public class Supplier {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "supplier_id")
 	private int supplierId;
 
@@ -49,6 +48,15 @@ public class Supplier {
 
 	@Column(name = "country")
 	private String country;
+	
+	@Column(name = "phone")
+	private String phone;
+	
+	@Column(name = "fax")
+	private String fax;
+
+	@Column(name = "homepage")
+	private String homepage;
 
 	@OneToMany(mappedBy = "supplier")
 	private List<Product> products;

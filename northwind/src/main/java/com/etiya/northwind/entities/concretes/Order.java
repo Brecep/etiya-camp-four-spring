@@ -25,18 +25,8 @@ import lombok.NoArgsConstructor;
 public class Order {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "order_id")
 	private int orderId;
-
-	@Column(name = "order_date")
-	private LocalDate orderDate;
-
-	@Column(name = "required_date")
-	private LocalDate requiredDate;
-
-	@Column(name = "shipped_date")
-	private LocalDate shippedDate;
 
 	@ManyToOne
 	@JoinColumn(name = "customer_id")
@@ -45,6 +35,46 @@ public class Order {
 	@ManyToOne
 	@JoinColumn(name = "employee_id")
 	private Employee employee;
+	
+	@Column(name = "order_date")
+	private LocalDate orderDate;
+
+	@Column(name = "required_date")
+	private LocalDate requiredDate;
+
+	@Column(name = "shipped_date")
+	private LocalDate shippedDate;
+	
+	@Column(name="ship_via")
+	private int shipVia;
+	
+	@Column(name="freight")
+	private double freight;
+	
+	@Column(name="ship_name")
+	private String shipName;
+	
+	
+	@Column(name="ship_address")
+	private String shipAddress;
+	
+	@Column(name="ship_city")
+	private String shipCity;
+	
+	@Column(name="ship_region")
+	private String shipRegion;
+	
+	@Column(name="ship_postal_code")
+	private String shipPostalCode;
+	
+	@Column(name="ship_country")
+	private String shipCountry;
+	
+
+
+	
+
+
 
 	@OneToMany(mappedBy = "order")
 	private List<OrderDetail> orderDetails;
