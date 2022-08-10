@@ -1,5 +1,7 @@
 package com.etiya.northwind.business.abstracts;
 import java.util.List;
+import java.util.Map;
+
 
 import com.etiya.northwind.business.requests.products.CreateRequestProduct;
 import com.etiya.northwind.business.requests.products.DeleteRequestProduct;
@@ -15,4 +17,10 @@ public interface ProductService {
 	GetProductResponse getById(int productId);
 	void delete(DeleteRequestProduct deleteRequestProduct);
 	void update(UpdateRequestProduct updateRequestProduct);
+//	List<Product> findProductsWithSort(String field);
+//    Page<Product> findProductsWithPagination(int offset, int pageSize);
+//    Page<Product> findProductsWithPaginationAndSorting(int offset, int pageSize, String field);
+    
+    List<ProductListResponse> getAllPages(int pageNo , int pageSize);
+	 Map<String,Object>getAllPagesSort(int pageNo, int pageSize,String entity,String type);
 }

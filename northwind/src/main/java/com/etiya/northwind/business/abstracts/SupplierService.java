@@ -1,6 +1,7 @@
 package com.etiya.northwind.business.abstracts;
 
 import java.util.List;
+import java.util.Map;
 
 
 import com.etiya.northwind.business.requests.suppliers.CreateRequestSupplier;
@@ -16,4 +17,11 @@ public interface SupplierService {
 	GetSupplierResponse getById(int supplierId);
 	void delete(DeleteRequestSupplier deleteRequestSupplier);
 	void update(UpdateRequestSupplier updateRequestSupplier);
+	
+//	List<Supplier> findSuppliersWithSort(String field);
+//    Page<Supplier> findSuppliersWithPagination(int offset, int pageSize);
+//    Page<Supplier> findSuppliersWithPaginationAndSorting(int offset, int pageSize, String field);
+	
+	  List<SupplierListResponse> getAllPages(int pageNo , int pageSize);
+		 Map<String,Object>getAllPagesSort(int pageNo, int pageSize,String entity,String type);
 }

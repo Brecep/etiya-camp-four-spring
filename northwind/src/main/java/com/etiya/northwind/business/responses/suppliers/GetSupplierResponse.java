@@ -1,7 +1,5 @@
 package com.etiya.northwind.business.responses.suppliers;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

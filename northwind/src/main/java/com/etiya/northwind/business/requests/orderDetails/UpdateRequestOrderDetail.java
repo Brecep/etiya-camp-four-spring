@@ -12,7 +12,6 @@ public class UpdateRequestOrderDetail {
 private int orderId;
 	
 	private int productId;
-	private String productName;
 	
 	private double unitPrice;
 	private int quantity;

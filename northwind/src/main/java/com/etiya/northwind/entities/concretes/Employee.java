@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -58,6 +56,23 @@ public class Employee {
 
 	@Column(name = "country")
 	private String country;
+	
+	@Column(name = "home_phone")
+	private String homePhone;
+	
+	@Column(name = "extension")
+	private String extension;
+	
+	@Column(name = "photo")
+	private byte[] photo;
+	
+	@Column(name="notes")
+	private String notes;
+	
+	@Column(name = "photo_path")
+	private String photoPath;
+	
+	
 
 	@OneToMany(mappedBy = "employee")
 	private List<Order> orders;

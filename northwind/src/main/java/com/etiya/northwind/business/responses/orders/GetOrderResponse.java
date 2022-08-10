@@ -2,13 +2,7 @@ package com.etiya.northwind.business.responses.orders;
 
 import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
-import com.etiya.northwind.entities.concretes.Customer;
-import com.etiya.northwind.entities.concretes.Employee;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,7 +27,7 @@ public class GetOrderResponse {
 
 	private LocalDate shippedDate;
 	
-	private int shipVia;
+
 	
 	private double freight;
 	

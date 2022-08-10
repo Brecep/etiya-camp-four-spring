@@ -5,20 +5,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.etiya.northwind.business.abstracts.SupplierService;
-import com.etiya.northwind.business.requests.products.CreateRequestProduct;
-import com.etiya.northwind.business.requests.products.DeleteRequestProduct;
-import com.etiya.northwind.business.requests.products.UpdateRequestProduct;
+
 import com.etiya.northwind.business.requests.suppliers.CreateRequestSupplier;
 import com.etiya.northwind.business.requests.suppliers.DeleteRequestSupplier;
 import com.etiya.northwind.business.requests.suppliers.UpdateRequestSupplier;
-import com.etiya.northwind.business.responses.products.GetProductResponse;
 import com.etiya.northwind.business.responses.suppliers.GetSupplierResponse;
 import com.etiya.northwind.business.responses.suppliers.SupplierListResponse;
 
+
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 
 @RestController
@@ -60,6 +61,36 @@ public class SuppliersController {
 		this.supplierService.delete(deleteRequestSupplier);
 	}
 	
+//	@GetMapping("/{field}")
+//    public ApiResponse<List<Supplier>> getSuppliersWithSort(@PathVariable String field) {
+//        List<Supplier> allSuppliers = supplierService.findSuppliersWithSort(field);
+//        return new ApiResponse<>(allSuppliers.size(), allSuppliers);
+//    }
+//
+//    @GetMapping("/pagination/{offset}/{pageSize}")
+//    public ApiResponse<Page<Supplier>> getSuppliersWithPagination(@PathVariable int offset, @PathVariable int pageSize) {
+//        Page<Supplier> suppliersWithPagination = supplierService.findSuppliersWithPagination(offset, pageSize);
+//        return new ApiResponse<>(suppliersWithPagination.getSize(),suppliersWithPagination);
+//    }
+//
+//    @GetMapping("/paginationAndSort/{offset}/{pageSize}/{field}")
+//    public ApiResponse<Page<Supplier>> getSuppliersWithPaginationAndSort(@PathVariable int offset, @PathVariable int pageSize,@PathVariable String field) {
+//        Page<Supplier> suppliersWithPagination = supplierService.findSuppliersWithPaginationAndSorting(offset, pageSize, field);
+//        return new ApiResponse<>(suppliersWithPagination.getSize(), suppliersWithPagination);
+//    }
+	
+	 @GetMapping("/getAllPages")
+		public List<SupplierListResponse> getAllPages(int pageNo, int pageSize){
+			return this.supplierService.getAllPages(pageNo , pageSize);
+		}
+		
+		@GetMapping("/getAllPagesSort")
+	    public Map<String,Object> getAllPagesSort(@RequestParam int pageNo,@RequestParam int pageSize,@RequestParam String entity,@RequestParam Optional<String> type){
+
+	        return this.supplierService.getAllPagesSort(pageNo,pageSize, entity,type.orElse(""));
+
+	    }
+		
 	
 	
 	

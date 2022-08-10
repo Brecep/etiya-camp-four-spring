@@ -15,6 +15,6 @@ public class GetOrderDetailResponse {
 	
 	private int orderId;
 	private int productId;
-	
+	private String productName;
 
 }

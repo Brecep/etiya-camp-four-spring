@@ -12,7 +12,6 @@ public class CreateRequestOrderDetail {
 	private int orderId;
 	
 	private int productId;
-	private String productName;
 	
 	private double unitPrice;
 	private int quantity;
