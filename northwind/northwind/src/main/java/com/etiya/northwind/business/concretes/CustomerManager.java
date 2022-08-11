@@ -19,7 +19,9 @@ import com.etiya.northwind.business.responses.customers.CustomerListResponse;
 import com.etiya.northwind.business.responses.customers.GetCustomerResponse;
 import com.etiya.northwind.core.utilities.mapping.ModelMapperService;
 import com.etiya.northwind.core.utilities.results.DataResult;
+import com.etiya.northwind.core.utilities.results.Result;
 import com.etiya.northwind.core.utilities.results.SuccessDataResult;
+import com.etiya.northwind.core.utilities.results.SuccessResult;
 import com.etiya.northwind.dataAccess.abstracts.CustomerRepository;
 import com.etiya.northwind.entities.concretes.Customer;
 
@@ -46,16 +48,18 @@ public class CustomerManager implements CustomerService {
 	}
 
 	@Override
-	public void add(CreateRequestCustomer createRequestCustomer) {
+	public Result add(CreateRequestCustomer createRequestCustomer) {
 		Customer customer = this.modelMapperService.forRequest().map(createRequestCustomer, Customer.class);
 		this.customerRepository.save(customer);
+		return new SuccessResult("CUSTOMER.ADDED!");
 
 	}
 
 	@Override
-	public void update(UpdateRequestCustomer updateRequestCustomer) {
+	public Result update(UpdateRequestCustomer updateRequestCustomer) {
 		Customer customer = this.modelMapperService.forRequest().map(updateRequestCustomer, Customer.class);
 		this.customerRepository.save(customer);
+		return new SuccessResult("CUSTOMER.UPDATED!");
 
 	}
 
@@ -78,20 +82,22 @@ public class CustomerManager implements CustomerService {
 //	}
 
 	@Override
-	public void delete(DeleteRequestCustomer deleteRequestCustomer) {
+	public Result delete(DeleteRequestCustomer deleteRequestCustomer) {
 
 		this.customerRepository.deleteById(deleteRequestCustomer.getCustomerId());
+		return new SuccessResult("CUSTOMER.DELETED!");
+
 	}
 
 	@Override
-	public GetCustomerResponse getcustomerId(String customerId) {
+	public DataResult<GetCustomerResponse> getcustomerId(String customerId) {
 		Customer customer = this.customerRepository.getById(customerId);
 		GetCustomerResponse response = this.modelMapperService.forResponse().map(customer, GetCustomerResponse.class);
-		return response;
+		return new SuccessDataResult<GetCustomerResponse>(response);
 	}
 
 	@Override
-	public List<CustomerListResponse> getAllPages(int pageNo, int pageSize) {
+	public DataResult<List<CustomerListResponse>> getAllPages(int pageNo, int pageSize) {
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
 		List<Customer> customers = this.customerRepository.findAll(pageable).getContent();
 		List<CustomerListResponse> response = customers.stream()
@@ -102,7 +108,7 @@ public class CustomerManager implements CustomerService {
 		int totalDatas = customers.size();
 		int totalPages = (int) Math.ceil(totalDatas / pageSize);
 
-		return response;
+		return new SuccessDataResult<List<CustomerListResponse>>(response);
 	}
 
 	@Override
